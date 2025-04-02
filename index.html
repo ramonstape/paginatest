@@ -96,55 +96,53 @@
     text-align: center;
 }
 
-        .product h2 {
-            font-size: 17px; 
-            margin: 15px 5px;
-        }
+        .product {
+    border: 2px solid #ddd; /* Borde gris claro alrededor del cuadro */
+    padding: 15px; /* Espacio alrededor del contenido */
+    background-color: #f9f9f9; /* Fondo gris claro */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil para dar profundidad */
+}
 
-        img {
-            max-width: 130px;
-            height: auto;
-        }
+.product h2 {
+    font-size: 17px; 
+    margin: 15px 5px;
+}
 
-        
-        .quantity-controls {
-            display: flex;
+img {
+    max-width: 130px;
+    height: auto;
+}
 
-            justify-content: center;
-            align-items: center;
-            margin-top: auto; 
-        }
-        
-        button {
-            border: none;
-            padding: 5px 10px;
-            font-size: 10px;
-            cursor: pointer;
-        }
+.quantity-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto; 
+}
 
-        .minus {
-            background-color: #000000;
-            color: white;
-            padding: 7px 15px;
-            font-size: 30px;
-            border-radius: 5px;
-            margin-right: 5px;
-        }
+button {
+    border: none;
+    padding: 5px 10px;
+    font-size: 10px;
+    cursor: pointer;
+}
 
-        .plus {
-            background-color: #000000;
-            color: white;
-            padding: 7px 15px;
-            font-size: 30px;
-            border-radius: 5px;
-            margin-left: 5px;
-        }
+.minus, .plus {
+    background-color: #000000;
+    color: white;
+    padding: 7px 15px;
+    font-size: 30px;
+    border-radius: 5px;
+    margin: 0 5px;
+}
 
-        .quantity {
-            font-size: 30px;
-            margin: 0 10px;
-            font-weight: bold;
-        }
+.quantity {
+    font-size: 30px;
+    margin: 0 10px;
+    font-weight: bold;
+}
+
 
         #cart {
             margin-top: 20px;
