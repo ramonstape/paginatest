@@ -102,7 +102,25 @@
             display: block;
         }
         
-        
+        .suggestions-box {
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    width: 100%;
+}
+
+.suggestion {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.suggestion:hover {
+    background-color: #f0f0f0;
+}
+
         .product-container {
             display: flex;
             flex-wrap: wrap;
@@ -355,34 +373,54 @@ h3 {
             document.getElementById(sectionId).classList.add('active');
         }
 
-        function searchProduct(event) {
-    event.preventDefault();
+        function suggestProducts() {
     const query = document.getElementById('search-bar').value.toLowerCase();
-    const sections = document.querySelectorAll('section');
-    let found = false;
+    const suggestionsBox = document.getElementById('suggestions');
+    suggestionsBox.innerHTML = '';
 
-    sections.forEach(section => {
-        const textContent = section.textContent.toLowerCase();
-        if (textContent.includes(query)) {
-            sections.forEach(sec => sec.classList.remove('active')); 
-            section.classList.add('active'); 
-            found = true;
+    if (!query) {
+        suggestionsBox.style.display = 'none';
+        return;
+    }
 
-           
-            const products = section.querySelectorAll('.product');
-            products.forEach(product => {
-                const productName = product.querySelector('h2').textContent.toLowerCase();
-                if (productName.includes(query)) {
-                    product.scrollIntoView({ behavior: 'smooth', block: 'center' }); 
-                }
-            });
+    const allProducts = document.querySelectorAll('.product h2');
+    const matchedProducts = [];
+
+    allProducts.forEach(product => {
+        const name = product.textContent.toLowerCase();
+        if (name.includes(query)) {
+            matchedProducts.push(product.textContent);
         }
     });
 
-    if (!found) {
-        alert('Producto o contenido no encontrado');
+    if (matchedProducts.length > 0) {
+        matchedProducts.forEach(name => {
+            const div = document.createElement('div');
+            div.className = 'suggestion';
+            div.textContent = name;
+            div.onclick = () => {
+                document.getElementById('search-bar').value = name;
+                document.getElementById('suggestions').innerHTML = '';
+                document.getElementById('suggestions').style.display = 'none';
+                document.querySelectorAll('section').forEach(section => {
+                    if (section.textContent.toLowerCase().includes(name.toLowerCase())) {
+                        document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+                        section.classList.add('active');
+                        const product = Array.from(section.querySelectorAll('.product h2'))
+                            .find(h2 => h2.textContent === name);
+                        if (product) product.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                });
+            };
+            suggestionsBox.appendChild(div);
+        });
+        suggestionsBox.style.display = 'block';
+    } else {
+        suggestionsBox.style.display = 'none';
     }
 }
+
+
 
     </script>
 </head>
@@ -394,10 +432,12 @@ h3 {
             <a href="#" onclick="showSection(event, 'Ofertas')">Ofertas</a>
 	    <a href="#" onclick="showSection(event, 'Novedades')">Novedades</a>
         </div>
-        <div id="search-bar-container">
-            <input type="text" id="search-bar" placeholder="Buscar productos...">
-            <button id="search-button" onclick="searchProduct(event)">Buscar</button>
-        </div>
+        <div id="search-bar-container" style="position: relative;">
+    <input type="text" id="search-bar" oninput="suggestProducts()" placeholder="Buscar productos...">
+    <div id="suggestions" class="suggestions-box"></div>
+    <button id="search-button" onclick="searchProduct(event)">Buscar</button>
+</div>
+
     </nav>
 
     <section id="inicio" class="active">
