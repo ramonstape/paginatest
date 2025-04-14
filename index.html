@@ -13,30 +13,59 @@
             color: #000;
         } 
         nav {
-            background-color: #333;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 10px 20px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        .nav-links {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            max-width: 800px;
-        }
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-size: 22px;
-            margin-right: 10px;
-        }
-        .nav-links a:hover {
-            color: #ffa500;
-        }
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #222;
+    color: white;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    white-space: nowrap;
+  }
+
+  #search-bar-container {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  #search-bar {
+    padding: 6px;
+  }
+
+  #search-button {
+    padding: 6px 10px;
+  }
+
+  @media screen and (max-width: 600px) {
+    nav {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    #search-bar-container {
+      width: 100%;
+    }
+
+    .nav-links {
+      width: 100%;
+      flex-direction: column;
+    }
+  }
         #search-bar-container {
             margin-top: 10px;
             display: flex;
