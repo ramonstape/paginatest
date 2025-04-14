@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Licores Avellaneda</title>
   <style>
     header {
@@ -19,13 +20,23 @@
     }
 
     .logo span {
-      color: white; /* también blanco para "Avellaneda" */
+      color: white;
     }
 
     .logo-icon {
       font-size: 24px;
       margin-right: 10px;
     }
+
+    /* 📱 Ajuste para celular */
+    @media (max-width: 600px) {
+      .logo {
+        font-size: 42px;      /* más grande en celular */
+      }
+
+      .logo-icon {
+        font-size: 30px;
+      }
  
 
         body {
